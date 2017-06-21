@@ -1,0 +1,42 @@
+	<!DOCTYPE html>
+<html ng-app='myApp'>
+<head>
+<meta charset="UTF-8">
+<title>Angular JS</title>
+<script src="angular.js"></script>
+
+</head>
+<body>
+	<div ng-controller='HelloController'>
+		<input ng-model='greeting.text'>
+		<p>{{greeting.text}}: Nice to meet you.</p>
+	</div>
+	
+	
+	<div ng-controller="TextController">
+		<p>{{someText}}</p>
+		<h3>{{Text2}}</h3>
+		<aside>{{Text3}}</aside>
+	</div>
+	
+	<div ng-controller="ClockController">
+		<p>{{clockText}}:IST</p>
+	</div>
+</body>
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('HelloController',  function($scope){
+$scope.greeting = { text: 'Hello' };
+
+}) ;
+
+ app.controller('TextController',  function($scope){
+
+$scope.someText = 'You have started your journey.';
+$scope.Text2 = 'Where are you heading?';
+$scope.Text3 = 'in the middle of nowhere';
+
+});
+</script>
+</html>

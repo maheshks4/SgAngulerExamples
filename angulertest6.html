@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head>
+<meta charset="UTF-8">
+<title>The Shopping Cart</title>
+<script src="angular.js"></script>
+</head>
+<body ng-controller='CartController'>
+
+<h1>The books </h1>
+<ul>
+	<div ng-repeat='item in services'>
+	<li>
+		<span>{{$index + 1}}.</span>
+		<span><input type="checkbox"  price="{{item.price}}" ng-click="calculte(item.price)"/>{{item.title}}</span>
+	</li>
+	</div>
+</ul>
+
+
+<h1>Sum: {{Total}}</h1>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('CartController', function($scope){
+$scope.services=[
+        { title: 'HTML5 development', price: 200},
+        { title: 'Android development', price: 250},
+        { title: 'iOS development', price: 190},
+        { title: 'Green Tea', price: 20}];
+		
+
+
+$scope.Total=0;
+
+$scope.calculte = function(price) {
+
+$scope.Total += price;
+}
+
+});
+</script>
+</body>
+</html>

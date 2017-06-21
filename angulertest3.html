@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head>
+<meta charset="UTF-8">
+<title>The Shopping Cart</title>
+<script src="angular.js"></script>
+</head>
+<body ng-controller='CartController'>
+<h1>The Order</h1>
+<div ng-repeat='item in items'>
+<span>{{item.title}}</span>
+<input ng-model='item.quantity'></input>
+<span>{{item.price | currency}} -----> </span>
+<span>{{item.price * item.quantity | currency}}</span>
+<button ng-click="remove($index)">Remove</button>
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('CartController', function($scope){
+$scope.items = [
+{title: 'Paint pots', quantity: 8, price: 4},
+{title: 'Polka dots', quantity: 10, price: 12},
+{title: 'Pebbles', quantity: 5, price: 6}
+];
+$scope.remove = function(index) {
+//$index: the iteration no. of the ng-repeat.
+$scope.items.splice(index, 1);
+}
+});
+</script>
+</body>
+</html>

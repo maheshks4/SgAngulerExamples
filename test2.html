@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>IIFE</title>
+<style>
+div{
+outline: 0.1em dashed blue ;
+width: 18em;
+height: 2em;
+margin: 1em ;
+text-align: center;
+tex
+}
+div:hover {background-color: cyan;}
+</style>
+</head>
+<body>
+<div>item no. : 0</div>
+<div>item no. : 1</div>
+<div>item no. : 2</div>
+<div>item no. : 3</div>
+<div>item no. : 4</div>
+<script>
+var myElements = document.getElementsByTagName('div');
+for (var i = 0; i < 5; ++i) {
+//myElements[i].onclick =  doSomething();
+
+//myElements[i].SetAttribute("onclick", "doSomething("+i+")");   
+
+myElements[i].addEventListener('click', function(){alert( 'Clicked on: ' + i );}, false);
+}
+
+function doSomething(i) {
+alert( 'Clicked on: ' + i );
+}
+</script>
+</body>
+</html>

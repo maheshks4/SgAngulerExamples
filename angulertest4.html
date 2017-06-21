@@ -1,0 +1,36 @@
+	<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>The Ship</title>
+<script src="angular.js"></script>
+</head>
+<body>
+<div ng-controller="ParentController">
+<div>
+Ship staff #1:
+{{firstName | lowercase}} {{lastName | uppercase}} and {{crewmen | number:1}} crewmen.
+</div>
+	<div ng-controller="ChildController">
+	Ship staff #2:
+	{{firstName}} {{lastName}} and {{crewmen}} crewmen.
+	</div>
+{{firstName}} {{lastName}} and {{crewmen}} crewmen.
+</div>
+<script>
+var app = angular.module('myApp', []);
+
+app.controller('ParentController', function($scope){
+$scope.firstName = 'Captain';
+$scope.lastName = 'Nemo';
+$scope.crewmen = 30;
+}) ;
+
+app.controller('ChildController', function($scope){
+$scope.lastName = 'Columbus';
+$scope.crewmen = $scope.crewmen + 56; //inheritance  
+//$scope.$parent.crewmen to update parent
+});
+</script>
+</body>
+</html>

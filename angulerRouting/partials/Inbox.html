@@ -1,0 +1,16 @@
+﻿My Mail Inbox
+<br />
+<table>
+<tr>
+<th>sender</th>
+<th>subject</th>
+<th>date</th>
+</tr>
+    <tr ng-repeat="message in messages | orderBy:'name'">
+	  <td>{{ message.sender }} </td>
+	  <td><a href="#/{{message.id}}"> {{ message.subject }}</a> </td>
+	  <td>{{ message.date }} </td>  
+	  
+	  </tr>
+<table />
+

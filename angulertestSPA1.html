@@ -1,0 +1,36 @@
+<html data-ng-app='myApp'>
+<head>
+<meta charset="utf-8">
+<title>Angular</title>
+<script src="angular.js"></script>
+</head>
+	<body>
+		<div ng-controller="Ctrl">
+			<select ng-model="template" ng-options="t.name for t in templates">
+				<option value="">(blank)</option>
+			</select>
+			<hr/>
+			url of the template: <tt>{{template.url}}</tt>
+			<hr/>
+			<div ng-include src="template.url" onload='myFunction()'></div>
+		</div>
+			<!-- template1.html -->
+			<script type="text/ng-template" id="template1.html">
+				Content of template1.html
+			</script>
+			<!-- template2.html -->
+			<script type="text/ng-template" id="template2.html">
+				<p><font color="red">Content of template2.html</font></p>
+			</script>
+			<script>
+			var app = angular.module('myApp', []);
+			app.controller('Ctrl', function($scope){
+					$scope.templates = [
+						{name: 'template1.html',url: 'template1.html'},
+						{name: 'template2.html',url: 'template2.html'}];
+					$scope.template = $scope.templates[0];
+					$scope.myFunction = function() {$scope.color = 'red';}
+			});
+			</script>
+	</body>
+</html>

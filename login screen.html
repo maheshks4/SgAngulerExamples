@@ -1,0 +1,44 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script type="text/javascript">
+function valid()
+{
+var user=document.login.user.value;
+var user=user.trim();
+var pass=document.login.pass.value;
+if(user == '')
+{
+document.getElementById('error').innerHTML="Please Enter Username";
+return false;
+}
+if(pass == '')
+{
+document.getElementById('error').innerHTML="Please Enter Password";
+return false;
+}
+
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(document.login.email.value))  
+  {  
+    return (true)  
+  }  
+  else
+  {
+  document.getElementById('error').innerHTML="Please Enter valid email";
+return false;
+  }
+   
+}
+</script>
+</head>
+<body>
+<div id="error"></div>
+<form name="login" method="post" action="" onsubmit="return valid()">
+Username: <input type="text" name="user" /><br />
+password<input type="password" name="pass" /><br />
+email<input type="text" name="email" /><br />
+<input type="submit" name="submit" />
+</form>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Using Services</title>
+		  <script src="angular.js"></script>
+	</head>
+	<body>
+
+		<div ng-app="app">
+			<div  ng-controller="BillingController">
+				<input type="text" ng-model="billingCode">
+				<button ng-click="saveBilling()">Save Billing</button><br><br>
+			</div>
+			
+			<div  ng-controller="ShippingController">
+     			<input type="text" ng-model="shippingCode">
+				<button ng-click="useBilling()">Use Billing</button>
+			</div>
+		</div>
+
+		<script>
+
+			var app = angular.module('app', []);
+			
+			app.service('BillingService', function() {
+				this.zipCode= "";
+				this.getZipCode = function() {
+					return this.zipCode;
+				}
+				
+				this.setZipCode = function(zip) {
+					this.zipCode=zip;
+				}
+				
+			});
+			
+			app.controller('BillingController', function($scope, BillingService) {
+					$scope.saveBilling = function() {
+						BillingService.setZipCode($scope.billingCode);
+					}
+			});
+			
+			app.controller('ShippingController', function($scope, BillingService) {
+				$scope.useBilling = function() {
+					$scope.shippingCode = BillingService.getZipCode();
+				}
+					
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+	<!DOCTYPE html><html>
+<head>
+<meta charset="utf-8" >
+
+<title>JS Obj</title>
+</head>
+
+<body>
+
+
+<form action="#" method="post" id="demoForm" name="demoForm">
+<input type="checkbox" name="sports[]" value="50" />val1 - 50
+<input type="checkbox" name="sports[]" value="200" />val2 - 200
+<input type="checkbox" name="sports[]" value="25" />val3 - 25
+<input type="text" id="no" name="htmo" />
+</form>
+
+<script>
+
+var sports = document.forms['demoForm'].elements[ 'sports[]' ];
+
+// using reference to sports obtained above
+for (var i=0, len=sports.length; i<len; i++) {
+    sports[i].onclick = doSomething;
+	
+	
+}
+
+var sum=0;
+// access properties of checkbox clicked using 'this' keyword
+function doSomething() {
+    if ( this.checked ) {
+        sum = sum + parseInt(this.value);
+    } 
+	else
+	{
+	 sum = sum - parseInt(this.value);
+	}
+	
+	document.getElementById('no').value = sum;
+}
+
+</script>
+</body>
+
+
+</html>

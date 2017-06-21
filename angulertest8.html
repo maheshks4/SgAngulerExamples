@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Custom Filter</title>
+<script src="angular.js"></script>
+</head>
+<body ng-app='myApp' ng-controller="HomeController">
+<h1>{{pageHeading | titleCase}}</h1> <!--titleCase custom filter-->
+<h1>{{pageHeading | uppercase}}</h1>
+<h1>{{"my TEXT Is here." | lowercase}}</h1>
+
+filtering ajay from list
+<ul ng-init="names = ['Ravi', 'Ajay', 'John', 'Ram']">
+<li ng-repeat="name in names | exclude:'Ajay'">
+<span>{{name}}</span>
+</li>
+</ul>
+
+
+<script>
+var app = angular.module('myApp', []);
+app.filter('titleCase', function() {
+	var titleCaseFilter = function(input) {
+	var words = input.split(' ');
+	for (var i = 0; i < words.length; i++) 
+	{
+		words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+	}
+	return words.join(' ');
+};
+return titleCaseFilter;
+});
+
+app.controller('HomeController', function($scope){
+$scope.pageHeading = 'behold the beauty of this page title';
+});
+
+
+app.filter('exclude', function() {
+var exclude = function(input,filtername) {
+ var index = input.indexOf(filtername);
+  if(index>0)
+  {
+	  input.splice(index, 1); 
+  }
+	return input;
+};
+return exclude;
+});
+</script>
+</body>
+</html>

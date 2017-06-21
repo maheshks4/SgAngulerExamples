@@ -1,0 +1,63 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS: Routes and Controller</title>
+	<script src="../angular.js"></script>
+	<script src="../angular-route.js"></script>
+</head>
+
+<body>
+<div  ng-app="myApp">
+	<div>
+		<h3>Adding Module Configuration and Routing</h3>
+        <!-- ng-view handles loading partials into it based upon routes -->
+		<div data-ng-view=""></div>
+	</div>
+</div>
+
+<script>
+    var myApp = angular.module('myApp', ['ngRoute']);
+    myApp.config(function ($routeProvider) {
+        $routeProvider
+            .when('/',
+                {
+                    controller: 'SimpleController',
+                    templateUrl:  'partials/Partial1.html'
+                })
+            
+            .when('/partial2',
+                {
+                    controller: 'SimpleController2',
+                    templateUrl:  'partials/Partial2.html'
+                })
+            .otherwise({ redirectTo: '/' });
+    });
+
+    
+    myApp.controller('SimpleController', function ($scope) {
+        $scope.customers = [
+            {name:'Dave',city:'Pune'},
+            {name:'Vij',city:'Blr'},
+            {name:'Ash',city:'Mumbai'},
+            {name:'Avinash',city:'Delhi'},
+            {name:'Avi',city:'Delhi'}
+        ];
+    });
+
+
+    myApp.controller('SimpleController2', function ($scope) {
+        $scope.customers = [
+            {name:'Ram',city:'Hyd'},
+            {name:'Ravi',city:'Mysore'},
+            {name:'Ash',city:'Mumbai'},
+            {name:'Avinash',city:'Delhi'},
+            {name:'Avi',city:'Delhi'}
+        ];
+    });
+</script>
+
+
+</body>
+</html>
+

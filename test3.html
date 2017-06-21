@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" >
+<title>Ajax Get</title>
+<style>
+#divText {color: red;}
+
+</style>
+
+</head>
+
+<body>
+<h3>Get a file</h3>
+<div id="divText"> </div>
+<script>
+var xhr = new XMLHttpRequest();
+console.log(xhr);
+xhr.open("GET", "./applications.html", true); // `false` makes the request synchronous.
+
+xhr.onload = function (e) {
+if (xhr.readyState === 4) {
+if (xhr.status === 200) {
+//console.log(xhr.responseText);
+document.getElementById('divText').innerHTML = xhr.responseText;
+} else {
+if (xhr.status === 404) {
+console.error("File status:: " + xhr.statusText);
+document.getElementById('divText').innerHTML = "File not found: " + xhr.status ;
+}
+else {console.error("error: " + xhr.status); }
+}
+}
+};
+
+xhr.onerror = function (e) {
+console.error(xhr.statusText);
+};
+
+xhr.send();
+</script>
+
+</body>
+</html>

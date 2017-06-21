@@ -1,0 +1,57 @@
+	<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="UTF-8">
+<title>Shopping Cart</title>
+<link href="bootstrap.css" rel="stylesheet">
+<script src="angular.js"></script>
+</head>
+
+<body>
+<div ng-controller="CartController">
+	<div ng-repeat="item in items">
+	<span>{{item.title}}</span>
+	<input ng-model="item.quantity">
+	<span>{{item.price | currency}}</span> --->
+	<span>{{item.price * item.quantity | currency}}</span>
+	</div>
+<div>Total: {{totalCart() | currency}}</div>
+<div>Discount: {{bill.discount | currency}}</div>
+<div>Subtotal: {{subtotal() | currency}}</div>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('CartController', function($scope){
+$scope.bill = {};
+
+$scope.items = [
+{title: 'Paint pots', quantity: 8, price: 4},
+{title: 'Polka dots', quantity: 10, price: 12},
+{title: 'Pebbles', quantity: 5, price: 7}
+];
+
+$scope.totalCart = function() {
+var total = 0;
+for (var i = 0, len = $scope.items.length; i < len; i++) {
+total = total + $scope.items[i].price * $scope.items[i].quantity;
+}
+
+return total;
+};
+
+$scope.subtotal = function() {
+return $scope.totalCart() - $scope.bill.discount;
+};
+
+function calculateDiscount(newValue, oldValue, $scope) {
+$scope.bill.discount = newValue > 100 ? 10 : 2;
+}
+
+var unb = $scope.$watch($scope.totalCart, calculateDiscount);
+
+//unb();
+});
+</script>
+</body>
+</html>

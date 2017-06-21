@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+<title>Shopping Cart</title>
+<script src="angular.js"></script>
+
+</head>
+
+<body ng-controller="ShoppingController">
+<h1>Shop!</h1>
+<table>
+<tr ng-repeat="item in items">
+<td>{{item.ID}}</td>
+<td>{{item.title}}</td>
+</tr>
+</table>
+<script>
+
+var myapp = angular.module('myApp', []);
+
+myapp.factory('Items', function($http) {
+	var items = {};
+	items.query = function() {return $http.get('data/posts.json');};
+	return items;
+});
+
+myapp.controller("ShoppingController", function ($scope, Items, $http) {
+	
+		Items.query().success( function (data)
+		{
+			$scope.items = data;
+		})
+	
+});
+
+</script>
+</body>
+</html>

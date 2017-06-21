@@ -1,0 +1,71 @@
+<!DOCTYPE html> 
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular JS: Routes and Controller</title>
+	<script src="../angular.js"></script>
+	<script src="../angular-route.js"></script>
+</head>
+
+<body>
+<div  ng-app="myApp">
+	<div>
+		<h3>Adding Module Configuration and Routing</h3>
+        <!-- ng-view handles loading partials into it based upon routes -->
+		<div data-ng-view=""></div>
+	</div>
+</div>
+
+<script>
+    var myApp = angular.module('myApp', ['ngRoute']);
+    myApp.config(function ($routeProvider) {
+        $routeProvider
+            .when('/',
+                {
+                    controller: 'InboxController',
+                    templateUrl:  'partials/Inbox.html'
+                })
+            
+            .when('/:mailid',
+                {
+                    controller: 'MailController',
+                    templateUrl:  'partials/Maildetails.html'
+                })
+            .otherwise({ redirectTo: '/' });
+    });
+
+    var msg;
+    myApp.controller('InboxController', function ($scope) {
+        $scope.messages = [{
+			  id: 0, sender: 'john@gmail.com', subject: 'Hi there, friend',
+			  date: 'Dec 7, 2013 12:32:00', recipients: ['greg@gmail.com'],
+			  message: 'Hey, we should get together for lunch sometime and catch up.'
+				+'There are many things we should collaborate on this year.'
+			}, {
+			  id: 1,  sender: 'mary@gmail.com',
+			  subject: 'Where did you leave my laptop?',
+			  date: 'Dec 7, 2013 8:15:12', recipients: ['greg@gmail.com', 'john@gmail.com', 'jose@gmail.com'],
+			  message: 'I thought you were going to put it in my desk drawer.'
+				+'But it does not seem to be there.'
+			}, {
+			  id: 2, sender: 'bill@gmail.com', subject: 'Lost python',
+			  date: 'Dec 6, 2013 20:35:02', recipients: ['greg@gmail.com','john@gmail.com', 'jose@gmail.com'],
+			  message: 'Nobody panic, but my pet python is missing from her cage.'
+				+'She doesn\'t move too fast, so just call me if you see her.'
+			} ];
+			msg = $scope.messages;
+		
+    });
+
+	myApp.controller('MailController', function($scope, $routeParams) {
+   	$scope.MailDetails =  msg[$routeParams.mailid];
+
+ });
+
+   
+</script>
+
+
+</body>
+</html>
+

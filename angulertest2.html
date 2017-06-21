@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app = "myApp">
+<head>
+<meta charset="utf-8">
+
+<title>Clock</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="angular.js">
+</script>
+
+</head>
+
+<body>
+<div ng-controller="MyController">
+<h1>Digital Clock: {{clock.now}}</h1>
+</div>
+
+<div ng-controller="AngController">
+<h1>YAC: {{clock.now}}</h1>
+</div>
+<script>
+var app = angular.module('myApp', []);
+// app.controller("MyController", function ($scope){
+// $scope.clock = { now: new Date() } ; // JSON data.
+
+// var updateClock = function(){
+// $scope.clock.now = new Date();
+// };
+// setInterval(function(){
+// $scope.$apply(updateClock);
+// }, 1000);
+// });
+
+
+
+var date1;
+app.controller('MyController',function ($scope){
+$scope.clock={now: new Date()};
+setInterval(currdate, 1000);
+function currdate(){
+// alert('currdate');
+$scope.$apply(applyNewDate) ;
+} ;
+
+function applyNewDate() {
+// alert('applyNewDate');
+$scope.clock.now = new Date();
+};
+});
+
+
+// ========Yet another clock ==============
+
+
+app.controller("AngController", function ($scope, $interval){
+$scope.clock = { now: new Date() } ; // JSON data.
+
+$scope.updateClock = function(){
+$scope.clock.now = new Date();
+};
+
+$interval($scope.updateClock, 1000);
+});
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+<head>
+<meta charset="UTF-8">
+<title>The Shopping Cart</title>
+<script src="angular.js"></script>
+</head>
+<body ng-controller='CartController'>
+<h1>The student list</h1>
+<ul>
+	<div ng-repeat='item in items'>
+	<li><a href="#">{{item.name}}</a>
+	<button ng-click="remove($index)">Remove</button></li>
+	</div>
+	<button ng-click="add($index)">insert</button>	
+</ul>
+
+<br/>
+
+<h1>The student list formated</h1>
+	<div ng-repeat='item in items'>
+	<span>{{$index + 1}}.</span>
+	<span>{{item.name}}</span>
+	<span>{{item.id}}</span>
+	</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('CartController', function($scope){
+$scope.items = [
+					{name:'Mary John', id:'10'},
+					{name:'Rahul B', id:'12'},
+					{name:'Ashoka R', id:'23'} 
+];
+$scope.add = function(index) {
+//$index: the iteration no. of the ng-repeat.
+$scope.items.push({name:'test', id:'5'});
+}
+
+$scope.remove = function(index) {
+$scope.items.splice(index, 1);
+}
+
+});
+</script>
+</body>
+</html>
